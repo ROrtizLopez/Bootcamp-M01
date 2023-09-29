@@ -48,6 +48,7 @@ Queue.prototype.size = function(){
 }
 
 Queue.prototype.dequeue = function(){
+  if (!this.array.length) return undefined;
    return this.array.shift();
 }
 
