@@ -30,7 +30,7 @@ LinkedList.prototype.add = function(value){
 };
 
 LinkedList.prototype.remove = function(){
-  if(!this.head) return null;
+  if(!this.head) return null; 
 
   let current = this.head;
 
