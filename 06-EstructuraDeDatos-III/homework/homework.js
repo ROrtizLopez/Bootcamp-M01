@@ -9,7 +9,85 @@
   - breadthFirstForEach: recorre el árbol siguiendo el orden breadth first (BFS)
   El ábrol utilizado para hacer los tests se encuentra representado en la imagen bst.png dentro del directorio homework.
 */
-function BinarySearchTree() {}
+function BinarySearchTree(value) {
+   this.value = value;
+   this.left = null;
+   this.right = null;
+};
+
+BinarySearchTree.prototype.size = function() {
+   let counter = 1;
+
+   if(this.left) counter += this.left.size();
+   if(this.right) counter += this.right.size();
+
+   return counter;
+};
+
+BinarySearchTree.prototype.insert = function(value){
+   if(value < this.value){
+      if(this.left){
+      this.left.insert(value);
+      } else {
+         this.left = new BinarySearchTree(value);
+         return value;
+      };
+   } else {
+      if (this.right){
+         this.right.insert(value);
+      } else {
+         this.right = new BinarySearchTree(value);
+         return value;
+      };
+   };
+};
+
+BinarySearchTree.prototype.contains = function(value){
+   if(this.value === value) return true;
+
+   if(value < this.value){
+      if(!this.left) return false;
+      return this.left.contains(value);
+   };
+
+   if(value > this.value){
+      if(!this.right) return false;
+      return this.right.contains(value);
+   };
+};
+
+BinarySearchTree.prototype.depthFirstForEach = function(cb, order){
+   if(order === 'in-order' || order === undefined){
+      if(this.left) this.left.depthFirstForEach(cb, order);
+      cb(this.value);
+      if(this.right) this.right.depthFirstForEach(cb, order);
+  };
+
+  if(order === 'pre-order'){
+      cb(this.value); 
+      if(this.left) this.left.depthFirstForEach(cb, order);
+      if(this.right) this.right.depthFirstForEach(cb, order);
+  };
+
+  if(order === 'post-order'){
+      if(this.left) this.left.depthFirstForEach(cb, order);
+      if(this.right) this.right.depthFirstForEach(cb, order);
+      cb(this.value); 
+  };
+};
+
+BinarySearchTree.prototype.breadthFirstForEach = function(cb, value = []){
+   if(this.left !== null) value.push(this.left);
+
+   if(this.right !== null) value.push(this.right);
+
+   cb(this.value);
+
+   if(value.length > 0){
+       value.shift().breadthFirstForEach(cb, value);
+   };
+};
+
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
