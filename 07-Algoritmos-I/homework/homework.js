@@ -7,7 +7,19 @@ function factorear(num) {
   // Ej: factorear(180) --> [1, 2, 2, 3, 3, 5] Ya que 1x2x2x3x3x5 = 180 y son todos números primos
   // Tu código:
 
-}
+  let factores = [1, ];
+  let divisor = 2;
+
+  while(num !== 0){
+    if(num % divisor === 0){
+      factores.push(divisor);
+      num = num / divisor;
+    } else {
+      divisor++;
+    };
+  };
+  return factores;
+};
 
 function bubbleSort(array) {
   // Implementar el método conocido como bubbleSort para ordenar de menor a mayor
@@ -15,7 +27,20 @@ function bubbleSort(array) {
   // Devolver el array ordenado resultante
   // Tu código:
 
-}
+  let swap = true;
+  while(swap){
+    swap = false;
+    for(let i = 0; i < array.length - 1; i++){
+      if(array[i] > array[i + 1]){
+        let aux = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = aux;
+        swap = true;
+      };
+    };
+  };
+  return array;
+};
 
 
 function insertionSort(array) {
@@ -23,8 +48,17 @@ function insertionSort(array) {
   // el array recibido como parámetro utilizando arreglos
   // Devolver el array ordenado resultante
   // Tu código:
-
-}
+  for (let i = 1; i < array.length - 1; i++){
+    let j = i -1;
+    let aux = array[i];
+    while (j >= 0 && aux < array[j]){
+      array[j + 1] = array[j];
+      j--;
+    };
+    array[j + 1] = aux;
+  };
+  return array;
+};
 
 
 function selectionSort(array) {
@@ -32,8 +66,22 @@ function selectionSort(array) {
   // el array recibido como parámetro utilizando dos arreglos
   // Devolver el array ordenado resultante
   // Tu código:
+  for (let i = 0; i < array.length -1; i++){
+    let min = i;
 
-}
+    for (let j = i + 1; j < array.length -1; j++){
+      if(array[j] < array[min]){
+        min = j;
+      }
+    }
+    if (j !== min){
+      let aux = array[i];
+      array[i] = array[min];
+      array[min] = aux;
+    };
+  };
+  return array;
+};
 
 
 // No modificar nada debajo de esta línea
