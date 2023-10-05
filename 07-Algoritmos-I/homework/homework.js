@@ -7,18 +7,18 @@ function factorear(num) {
   // Ej: factorear(180) --> [1, 2, 2, 3, 3, 5] Ya que 1x2x2x3x3x5 = 180 y son todos números primos
   // Tu código:
 
-  let factores = [1, ];
+  let factors = [1];
   let divisor = 2;
 
-  while(num !== 0){
-    if(num % divisor === 0){
-      factores.push(divisor);
+  while(num > 1){
+    if (num % divisor === 0){
+      factors.push(divisor);
       num = num / divisor;
     } else {
       divisor++;
     };
   };
-  return factores;
+  return factors;
 };
 
 function bubbleSort(array) {
@@ -28,10 +28,12 @@ function bubbleSort(array) {
   // Tu código:
 
   let swap = true;
+
   while(swap){
     swap = false;
-    for(let i = 0; i < array.length - 1; i++){
-      if(array[i] > array[i + 1]){
+
+    for (let i = 0; i < array.length - 1; i++){
+      if (array[i] > array[i + 1]){
         let aux = array[i];
         array[i] = array[i + 1];
         array[i + 1] = aux;
@@ -48,9 +50,11 @@ function insertionSort(array) {
   // el array recibido como parámetro utilizando arreglos
   // Devolver el array ordenado resultante
   // Tu código:
-  for (let i = 1; i < array.length - 1; i++){
-    let j = i -1;
+  
+  for (let i = 1; i < array.length; i++){
+    let j = i - 1;
     let aux = array[i];
+
     while (j >= 0 && aux < array[j]){
       array[j + 1] = array[j];
       j--;
@@ -66,18 +70,17 @@ function selectionSort(array) {
   // el array recibido como parámetro utilizando dos arreglos
   // Devolver el array ordenado resultante
   // Tu código:
-  for (let i = 0; i < array.length -1; i++){
-    let min = i;
-
-    for (let j = i + 1; j < array.length -1; j++){
-      if(array[j] < array[min]){
-        min = j;
-      }
-    }
-    if (j !== min){
+  for (let i = 0; i < array.length; i++){
+    let miIndex = i;
+    for (let j = i + 1; j < array.length; j++){
+      if (array[j] < array[miIndex]){
+        miIndex = j;
+      };
+    };
+    if (miIndex !== i){
       let aux = array[i];
-      array[i] = array[min];
-      array[min] = aux;
+      array[i] = array[miIndex];
+      array[miIndex] = aux;
     };
   };
   return array;
