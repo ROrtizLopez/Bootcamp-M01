@@ -16,8 +16,17 @@ const {
 
 var countArray = function(array) {
     // Tu código aca:
-    
-}
+    let suma = 0;
+
+    for (let i = 0; i < array.length; i++){
+        if(Array.isArray(array[i])){
+            suma += countArray(array[i])
+        } else {
+            suma += array[i];
+        };
+    };
+    return suma; 
+};
 
 
 // Implementar la función countProps: a partir de un objeto en el cual cada propiedad puede contener
@@ -39,8 +48,19 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
+    let counter = 0;
 
-}
+    for (let prop in obj){
+        counter++;
+        if(typeof obj[prop] === 'object'){
+            if(!Array.isArray(obj[prop])){
+                counter = counter + countProps(obj[prop]);
+            };
+        };
+    };
+    return counter;
+};
+
 
 
 // Implementar el método changeNotNumbers dentro del prototype de LinkedList que deberá cambiar
@@ -53,7 +73,18 @@ var countProps = function(obj) {
 
 LinkedList.prototype.changeNotNumbers = function(){
     // Tu código aca:
+    let counter = 0;
+    let current = this.head;
 
+    while(current){
+        let number = Number(current.value);
+        if(isNaN(number)){
+            counter++;
+            current.value  = 'Kiricocho';
+        };
+        current = current.next;
+    };
+    return counter;
 }
 
 
@@ -68,7 +99,18 @@ LinkedList.prototype.changeNotNumbers = function(){
 var mergeQueues = function(queueOne, queueTwo) {
     // Tu código aca:
 
-}
+    let newQueue = new Queue();
+
+    while(queueOne.size() || queueTwo.size()){
+        let first = queueOne.dequeue();
+        let second = queueTwo.dequeue();
+
+        if(first) newQueue.enqueue(first);
+        if(second) newQueue.enqueue(second);
+    };
+
+    return newQueue;
+};
 
 
 // Implementar la funcion closureMult que permita generar nuevas funciones que representen
@@ -82,14 +124,21 @@ var mergeQueues = function(queueOne, queueTwo) {
 
 var closureMult = function(multiplier) {
     // Tu código aca:
-
+    return function(num){
+        return num * multiplier;
+    };
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
 // que debe retornar la suma total de los valores dentro de cada nodo del arbol
 BinarySearchTree.prototype.sum = function() {
     // Tu código aca:
+    let counter = this.value;
 
+    if(this.left) counter += this.left.sum();
+    if(this.right) counter += this.right.sum();
+
+    return counter;
 }
 
 module.exports = {
